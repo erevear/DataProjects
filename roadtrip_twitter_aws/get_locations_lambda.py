@@ -51,50 +51,40 @@ def parse_geonames(geonames_results):
 		places.append(place_data)
 	return places
 
-def get_data_dict_json(comprehend_entities):
-    for entity in comprehend_entities:
-            entity_text = entity["Text"].replace("#","")
-            entity_type = entity["Type"]
-            if entity_type == "LOCATION":
-                google_maps_results = pull_google_maps_location(entity_text)
-                google_maps_place = parse_google_maps_results(json.loads(google_maps_results))
-                if google_maps_place:
-                    matched_place_dict = {}
-                    matched_place_dict["title"] = google_maps_place["title"]
-                    matched_place_dict["latitude"] = google_maps_place["latitude"]
-                    matched_place_dict["longitude"] = google_maps_place["longitude"]
-                    print(matched_place_dict)
-                    return matched_place_dict
 
 def lambda_handler(event, context):
     output = []
 
     for record in event['records']:
-        
         tweet_text = json.loads(base64.b64decode(record['data']).decode('utf-8').strip())['text']
         print(tweet_text)
         
-
+ 
         comprehend_entities = get_comprehend_entities(tweet_text)["Entities"]
         print(comprehend_entities)
-        matched_place_json = get_data_dict_json(comprehend_entities)
-        if matched_place_json:
-            data_record = {
-                
-                'tweet':tweet_text,
-
-                'geopnt':[matched_place_json['longitude'], matched_place_json['latitude']]
-            }
-            print(data_record)
+        for entity in comprehend_entities:
+            entity_text = entity["Text"].replace("#","")
+            entity_type = entity["Type"]
+            if entity_type == "LOCATION" and not entity_text.isdigit():
+                google_maps_results = pull_google_maps_location(entity_text)
+                google_maps_place = parse_google_maps_results(json.loads(google_maps_results))
+                #print(google_maps_places)
+                if google_maps_place:
+                    data_record = {
+                        'tweet':tweet_text,
+                        'geopnt':[google_maps_place['longitude'], google_maps_place['latitude']]
+                    }
+                    print(data_record)
+                    output_record = {
+                        'recordId': record['recordId'],
+                        'result': 'Ok',
+                        'data': base64.b64encode(json.dumps(data_record).encode('utf-8')).decode('utf-8')
+                    }
+                    print(output_record)
+                    output.append(output_record)
+        
             
-            output_record = {
-                'recordId': record['recordId'],
-                'result': 'Ok',
-                'data': base64.b64encode(json.dumps(data_record).encode('utf-8')).decode('utf-8')
-            }
-            print(output_record)
             
-            output.append(output_record)
 
     print(output)
     return {'records': output}
