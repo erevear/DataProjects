@@ -4,6 +4,9 @@
 This project is a pipeline to stream tweets from the Twitter API, move them into a Kinesis Firehose through to Opensearch, do some transformations with a Lambda function, and finally visualize the results in Opensearch Dashboard. 
 The primary goal of the project was to learn about the various tools mentioned above, however, it was also a fun way to find out where people all over the world are heading on their roadtrips, and maybe get some ideas for new adventures.
 <br>
+<br>
+<br>
+<br>
 <b>Pipeline</b><br>
 ![Roadtrip Twitter](https://user-images.githubusercontent.com/11822655/147527781-b246b0c1-2ad0-4b5d-bf0b-eec35110c76b.jpeg)
 <b>1. Twitter API and Python</b><br>
