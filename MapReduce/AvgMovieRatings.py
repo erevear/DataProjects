@@ -1,3 +1,7 @@
+"""
+Part of assignment for the Udemy Taming Big Data with Mapreduce and Hadoop.
+Data Source: MovieLens 100k Dataset: https://grouplens.org/datasets/movielens/
+"""
 from mrjob.job import MRJob
 from mrjob.step import MRStep
 
