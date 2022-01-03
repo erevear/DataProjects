@@ -1,5 +1,6 @@
 """
 Part of assignment for the Udemy Taming Big Data with Mapreduce and Hadoop.
+Gets the averages of all of the ratings for each movie, sorts, outputs results
 Data Source: MovieLens 100k Dataset: https://grouplens.org/datasets/movielens/
 """
 from mrjob.job import MRJob
