@@ -1,12 +1,12 @@
 <h2>Books Reddit is Talking About</h2>
-The goal of this project was to mine the Reddit r/books sub for the reads that prompted the most people to start a conversation so far in 2022, and understand, at scale, general feelings around the book. The technology stack consists of Elasticsearch, for storage, and Spark and Textblob for analysis, and Google Sheets for the visualization. It utilizes the Openlibrary data dump for book titles, and the pushshift API to gather Reddit data.
+The goal of this project was to mine the Reddit r/books sub for the reads that prompted the most people to start a conversation so far in 2022, and understand, at scale, general feelings around the book. The technology stack consists of Elasticsearch, for storage, Spark and Textblob for analysis, and Google Sheets for the visualization. It utilizes the Openlibrary (https://openlibrary.org/developers/dumps) data dump for book titles, and the pushshift API to gather Reddit data.
 The following viz is the result of the analysis, and below is the technology used in the process.
 
 ![reddit_books_viz](https://user-images.githubusercontent.com/11822655/177212612-6896c4df-d38d-4c8b-bc7b-fc367f44c2db.PNG)
 
 
 <b>Data Gathering</b><br>
-The idea behind this project was to parse book titles out of the post headers from the r/books subreddit. This ended up being quite challenging without employing a machine learned strategy (see next steps), and did ultimately require manual intervention to reach the final result, however, I learned a lot about Mongo and Python along the way which was the primary goal.
+The idea behind this project was to parse book titles out of the post headers from the r/books subreddit. This ended up being quite challenging without employing a machine learned strategy (see next steps), and did ultimately require manual intervention to reach the final result, however, I learned a lot about Elasticsearch, NoSQL DBs, Spark, and Python along the way which was the primary goal.
 
  <b>The final pipeline architecture</b><br>
 First, I bulk loaded the Openlibrary data dump (with X number of books) into elasticsearch. In order to keep the data small (all of this was running locally) I first pulled out the titles from the openlib dataset and dropped the authors, metadata, etc.
