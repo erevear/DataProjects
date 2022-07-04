@@ -1,6 +1,6 @@
 <h2>Books Reddit is Talking About</h2>
 The goal of this project was to mine the Reddit r/books sub for the reads that prompted the most people to start a conversation so far in 2022, and understand, at scale, general feelings around the book. The technology stack consists of Elasticsearch, for storage, and Spark and Textblob for analysis, and Google Sheets for the visualization. It utilizes the Openlibrary data dump for book titles, and the pushshift API to gather Reddit data.
-The following viz is the result of the analysis, and below is the technology used in the proces.
+The following viz is the result of the analysis, and below is the technology used in the process.
 
 ![reddit_books_viz](https://user-images.githubusercontent.com/11822655/177212612-6896c4df-d38d-4c8b-bc7b-fc367f44c2db.PNG)
 
